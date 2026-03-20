@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arena Café</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --cor-principal: #111111;
+        --cor-secundaria: #c7a16a;
+        --cor-clara: #f8f5f0;
+        --cor-texto: #2b2b2b;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-image: url("fundo-arena.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      .navbar {
+        background: rgba(0, 0, 0, 0.9) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar-brand {
+        color: #fff !important;
+        font-size: 1.4rem;
+        letter-spacing: 0.5px;
+      }
+
+      .nav-link {
+        color: #f1f1f1 !important;
+        transition: 0.3s;
+      }
+
+      .nav-link:hover {
+        color: var(--cor-secundaria) !important;
+      }
+
+      .carousel-item img {
+        height: 520px;
+        object-fit: cover;
+        filter: brightness(0.65);
+      }
+
+      .carousel-caption {
+        bottom: 18%;
+      }
+
+      .carousel-caption h1,
+      .carousel-caption h2 {
+        font-weight: bold;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      }
+
+      .carousel-caption p {
+        font-size: 1.1rem;
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+      }
+
+      .btn-custom {
+        background-color: var(--cor-secundaria);
+        color: white;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 30px;
+        transition: 0.3s;
+      }
+
+      .btn-custom:hover {
+        background-color: #a88554;
+        transform: translateY(-2px);
+      }
+
+      .section-title {
+        font-weight: bold;
+        color: var(--cor-principal);
+        position: relative;
+        margin-bottom: 35px;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 70px;
+        height: 4px;
+        background: var(--cor-secundaria);
+        margin: 12px auto 0;
+        border-radius: 10px;
+      }
+
+      .sobre-img {
+        width: 100%;
+        border-radius: 20px;
+        height: 340px;
+        object-fit: cover;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .sobre-box {
+        background: var(--cor-clara);
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      }
+
+      .card-img-top {
+        height: 220px;
+        object-fit: cover;
+      }
+
+      .menu-card {
+        transition: 0.35s;
+        border: none;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      }
+
+      .menu-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+      }
+
+      .badge-custom {
+        background-color: var(--cor-secundaria);
+        font-size: 0.8rem;
+      }
+
+      .preco {
+        color: #198754;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .icon-box {
+        background-color: white;
+        border-radius: 18px;
+        padding: 30px 25px;
+        text-align: center;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+        height: 100%;
+      }
+
+      .icon-box:hover {
+        transform: translateY(-8px);
+      }
+
+      .icon-box h3 {
+        font-size: 2rem;
+      }
+
+      .contact-box,
+      .mapa-box {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        height: 100%;
+      }
+
+      .form-control,
+      .form-control:focus {
+        border-radius: 12px;
+        box-shadow: none;
+      }
+
+      footer {
+        background: #0d0d0d;
+      }
+
+      footer p,
+      footer small {
+        color: #f1f1f1;
+      }
+
+      .highlight {
+        color: var(--cor-secundaria);
+        font-weight: bold;
+      }
+
+      @media (max-width: 768px) {
+        .carousel-item img {
+          height: 350px;
+        }
+
+        .carousel-caption {
+          bottom: 10%;
+        }
+
+        .carousel-caption h1,
+        .carousel-caption h2 {
+          font-size: 1.8rem;
+        }
+
+        .carousel-caption p {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+      <div class="container">
+        <img src="corinthians-removebg-preview.png" alt="Logo" height="55" />
+        <a class="navbar-brand fw-bold ms-2" href="#">Arena Café</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+          aria-controls="menu"
+          aria-expanded="false"
+          aria-label="Alternar navegação"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="#inicio" class="nav-link">Início</a>
+            </li>
+            <li class="nav-item">
+              <a href="#sobre" class="nav-link">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a href="#cardapio" class="nav-link">Cardápio</a>
+            </li>
+            <li class="nav-item">
+              <a href="#diferenciais" class="nav-link">Diferenciais</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contato" class="nav-link">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Carrossel -->
+    <section id="inicio">
+      <div id="carrossel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="fundo timao.png" class="d-block w-100" alt="Arena Café" />
+            <div class="carousel-caption"></div>
+          </div>
+
+          <div class="carousel-item">
+            <img
+              src="arena.png"
+              class="d-block w-100"
+              alt="Neo Química Arena"
+            />
+            <div class="carousel-caption"></div>
+          </div>
+
+          <div class="carousel-item">
+            <img
+              src="cafeteria.png"
+              class="d-block w-100"
+              alt="Cafeteria aconchegante"
+            />
+            <div class="carousel-caption"></div>
+          </div>
+        </div>
+
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carrossel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carrossel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="py-5">
+      <div class="container">
+        <h2 class="text-center section-title">Sobre Nós</h2>
+        <div class="row align-items-center g-4">
+          <div class="col-md-6">
+            <div class="sobre-box">
+              <p>
+                O <span class="highlight">Arena Café</span> nasceu para unir
+                duas paixões: um café de qualidade e a atmosfera marcante da
+                <span class="highlight">Neo Química Arena</span>.
+              </p>
+              <p>
+                Aqui, cada detalhe foi pensado para oferecer conforto,
+                atendimento de qualidade e um espaço acolhedor para quem deseja
+                relaxar, conversar ou viver momentos especiais.
+              </p>
+              <p>
+                Mais do que uma cafeteria, somos um ponto de encontro para quem
+                ama sabor, energia e boas experiências.
+              </p>
+              <a href="#contato" class="btn btn-custom">Faça uma visita</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <img
+              src="por fora.png"
+              alt="Parte externa da Arena Café"
+              class="sobre-img"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cardápio -->
+    <section
+      id="cardapio"
+      class="py-5"
+      style="background-color: var(--cor-clara)"
+    >
+      <div class="container">
+        <h2 class="text-center section-title">Nosso Cardápio</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card menu-card h-100">
+              <img
+                src="expresso.png"
+                class="card-img-top"
+                alt="Café Expresso"
+              />
+              <div class="card-body text-center">
+                <span class="badge badge-custom mb-2">Mais pedido</span>
+                <h5 class="card-title">Expresso</h5>
+                <p class="card-text">
+                  Café puro, forte e encorpado para começar bem o dia.
+                </p>
+                <p class="preco">R$ 5,00</p>
+                <button class="btn btn-outline-dark rounded-pill px-4">
+                  Comprar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="card menu-card h-100">
+              <img src="capuccino.png" class="card-img-top" alt="Cappuccino" />
+              <div class="card-body text-center">
+                <span class="badge badge-custom mb-2">Especial da casa</span>
+                <h5 class="card-title">Cappuccino</h5>
+                <p class="card-text">
+                  A combinação perfeita de café, leite e espuma cremosa.
+                </p>
+                <p class="preco">R$ 8,00</p>
+                <button class="btn btn-outline-dark rounded-pill px-4">
+                  Comprar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="card menu-card h-100">
+              <img
+                src="cafe gelado.png"
+                class="card-img-top"
+                alt="Café gelado"
+              />
+              <div class="card-body text-center">
+                <span class="badge badge-custom mb-2">Refrescante</span>
+                <h5 class="card-title">Café Gelado</h5>
+                <p class="card-text">
+                  Refrescante, leve e saboroso para qualquer momento.
+                </p>
+                <p class="preco">R$ 7,00</p>
+                <button class="btn btn-outline-dark rounded-pill px-4">
+                  Comprar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section id="diferenciais" class="py-5">
+      <div class="container">
+        <h2 class="text-center section-title">Nossos Diferenciais</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="icon-box">
+              <h3>☕</h3>
+              <h5>Qualidade em cada xícara</h5>
+              <p>
+                Selecionamos cafés especiais para oferecer aroma, sabor e
+                excelência.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="icon-box">
+              <h3>🏟️</h3>
+              <h5>Ambiente temático</h5>
+              <p>
+                Um espaço inspirado na energia da Neo Química Arena e na paixão
+                pelo Corinthians.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="icon-box">
+              <h3>🍰</h3>
+              <h5>Combinações deliciosas</h5>
+              <p>
+                Doces e acompanhamentos perfeitos para deixar seu momento ainda
+                melhor.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section
+      id="contato"
+      class="py-5"
+      style="background-color: var(--cor-clara)"
+    >
+      <div class="container">
+        <h2 class="text-center section-title">Entre em Contato</h2>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="contact-box">
+              <form>
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Seu nome"
+                  />
+                </div>
+                <div class="mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Seu e-mail"
+                  />
+                </div>
+                <div class="mb-3">
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    placeholder="Sua mensagem"
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-custom w-100">
+                  Enviar mensagem
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="mapa-box">
+
+
+              <h5>📞 Telefone</h5>
+              <p>(11) 1234-5678</p>
+
+              <h5>⏰ Horário</h5>
+              <p>Segunda a Sábado: 8h às 22h</p>
+
+            <h5>📍 Onde estamos</h5>
+              <p>Próximo à Neo Química Arena - São Paulo, SP</p>
+              <br>
+              <a
+                href="https://www.google.com/maps?q=Neo+Quimica+Arena+Sao+Paulo"
+                target="_blank"
+                class="btn btn-danger mt-3 w-100"
+              >
+                📍 Abrir no Google Maps
+              </a>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="text-white text-center py-4">
+      <p class="mb-1">© 2026 Arena Café - Todos os direitos reservados</p>
+      <small>Paixão, aroma e sabor em um só lugar ☕</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
